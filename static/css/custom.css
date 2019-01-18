@@ -1,0 +1,53 @@
+/* Navbar */
+
+.navbar-custom {
+    background-color: #3193de;
+}
+/* change the brand and text color */
+
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+    text-decoration: none; color: #fff;
+}
+
+/* change the link color */
+
+.navbar-custom .navbar-nav .nav-link {
+   text-decoration: none; color: #fff;
+}
+
+/* change the color of active or hovered links */
+
+.navbar-custom .nav-item.active .nav-link,
+.navbar-custom  {
+  text-decoration: none;  color: #fff;
+}
+
+.nav-item .nav-link:hover {
+    text-decoration: none; color: #ff0000;
+}
+
+/* for dropdown only - change the color of dropdown */
+
+.navbar-custom .dropdown-menu {
+    background-color: #3193de;
+}
+
+.navbar-custom .dropdown-item {
+    text-decoration: none; color: #fff;
+}
+
+.navbar-custom .dropdown-item:hover,
+.navbar-custom .dropdown-item:focus {
+    text-decoration: none; color: #ff0000;
+    background-color:#3193de;
+}
+.navbar-header .navbar-toggler {
+  border: 0;
+}
+.navbar-toggler-icon {
+  color: #fff;
+}
+.navbar-toggler-icon:hover {
+  background: #ff0000;
+}

@@ -1,7 +1,15 @@
 from django.contrib import admin
-from django.apps import apps
+from .models import Question, QuestionChoices
 
-app = apps.get_app_config('quiz')
+from django.contrib import admin
+from nested_admin import NestedModelAdmin, NestedStackedInline, NestedTabularInline
 
-for model_name, model in app.models.items():
-    admin.site.register(model)
+
+class QuestionTabularInline(NestedTabularInline):
+    model = Question
+    extra = 1
+
+class QuestionAdmin(NestedModelAdmin):
+   inlines = [QuestionTabularInline]
+
+admin.site.register(Question, QuestionTabularInline)
