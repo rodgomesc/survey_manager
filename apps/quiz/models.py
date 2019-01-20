@@ -15,7 +15,7 @@ class QuestionImage(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
     question = models.CharField(max_length=70)
-    image = models.OneToOneField(QuestionImage, on_delete=models.CASCADE)
+    image = models.ForeignKey(QuestionImage, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.question
@@ -23,8 +23,6 @@ class Question(models.Model):
 class QuestionChoices(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice = models.CharField(max_length=130)
-    is_correct = models.BooleanField()
-
     def __str__(self):
         return self.choice
 
