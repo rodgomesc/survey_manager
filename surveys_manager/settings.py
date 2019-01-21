@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_fields',
     'apps.quiz',
 
 ]
@@ -95,3 +96,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+MEDIA_URL= os.path.join(BASE_DIR, '/img/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
+

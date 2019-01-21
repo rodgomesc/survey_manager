@@ -7,7 +7,11 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css'>
+     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <!-- Full Page CSS -->
+    <link rel='stylesheet' href="{% static 'css/jquery.fullPage.css'%}">
+    <!-- My Custom CSS -->
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
     <title>Document</title>
 </head>
@@ -15,7 +19,7 @@
     <header>
 
       <div class="header-top clearfix">
-        <h1 class="l-center"><a href="#firstSection">{{quiz}}</a></h1>
+        <h1 class="l-center">{{quiz}}</h1>
        <!--
         <a class="l-right toggle-menu" href="#">
           <i></i>
@@ -53,23 +57,30 @@
       <section class="vertical-scrolling">
 
 
-          {% for item in question_list %}
+          {% for item in object.question_list %}
           <div class="horizontal-scrolling">
+              <div class="container">
+                <div class="jumbotron jumbotron-fluid shadow-lg p-3 mb-5 bg-white rounded">
+                    <div class="row">
+                        <div style="border-style:solid; border-color:blue;" class="col-sm-3">
+                                <img  width="200" height="200" class="shadow-sm p-3 mb-5 rounded-circle" src="{{ item|get_value_from_dict:'question_image' }}" alt="quiz image">
+                        </div>
+                        <div class="col-sm-9">
+                            <h1 class="display-4">{{ item|get_value_from_dict:'question' }}</h1>
+                                {% for x in item|get_value_from_dict:'choices' %}
+                                <li>    {{ x }} </li>
+                                {% endfor %}
+                                </li>
+                        </div>
+                     </div>
 
-                 <h2>   <li>{{ item|get_value_from_dict:'question' }}</li>
-                        <li>{% for x in item|get_value_from_dict:'choices' %}
-                            {{ x }}
-                            {% endfor %}
-                        </li>
-
-
-                     <h2/>
+                 </div>
+               </div>
 
 
 
 
-
-             <a id="button2Id" href="#firstSection/2" class="icon-up-open-big"></a>
+            <!-- <a id="button2Id" href="#firstSection/2" class="icon-up-open-big"></a> -->
           </div>
           {% endfor %}
 
@@ -88,8 +99,9 @@
         -->
       </section>
     </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js'></script>
+    <script src="{% static 'js/jquery.js'%}"></script>
+    <script src="{% static 'js/jquery.fullPage.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
 
     <script>
 

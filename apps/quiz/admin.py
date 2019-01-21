@@ -30,8 +30,18 @@ class QuestionAdmin(nested_admin.NestedModelAdmin):
     #change_list_template = 'admin/change_list_graph.html'
     inlines = [QuestionTabularInline]
 
+class QuestionImageAdmin(admin.ModelAdmin):
+    def get_model_perms(self, request): # hide this model from admin
+            return {}
+    #change_list_template = 'admin/change_list_graph.html'
+
+
+
+
+
 
 
 admin.site.register(Quiz, QuestionAdmin)
+admin.site.register(QuestionImage, QuestionImageAdmin)
 
 
