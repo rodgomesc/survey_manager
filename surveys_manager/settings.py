@@ -12,7 +12,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
-    #'grappelli',
+
     'nested_admin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_fields',
+    'debug_toolbar',
     'apps.quiz',
 
 ]
@@ -33,6 +33,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'surveys_manager.urls'
@@ -99,4 +100,6 @@ STATICFILES_DIRS = [
 
 MEDIA_URL= os.path.join(BASE_DIR, '/img/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
+
+INTERNAL_IPS = ('127.0.0.1',)
 

@@ -1,7 +1,6 @@
-{% extends "admin/index.html" %}
+{% extends "admin/change_list.html" %}
 {% load staticfiles %}
 {% block extrahead %}
-
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
@@ -24,15 +23,12 @@
             }
         };
         window.onload = function () {
-            var ctx = document.getElementById("quiz-chart");
-
-            {% regroup cl.queryset|dictsort:"quiz" by get_quiz_display as quiz_list %}
-
-            alert("{{cl.queryset}}")
+            var ctx = document.getElementById("gender-chart");
+            {% regroup cl.queryset|dictsort:"gender" by get_gender_display as gender_list %}
             var lineChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: [{% for quiz in quiz_list %}'{{ quiz.grouper }}',{% endfor %}],
+                    labels: [{% for gender in gender_list %}'{{ gender.grouper }}',{% endfor %}],
                     datasets: [{
                         data: [{% for gender in gender_list %}'{{ gender.list|length }}',{% endfor %}],
                         backgroundColor: [{% for gender in gender_list %}randomColorGenerator(),{% endfor %}]
@@ -71,13 +67,13 @@
     <h1> Graphs </h1>
     <hr>
     <div class="row">
-        <div style="border-style: solid; border-color:blue;" class="col-sm-4">
-            <canvas id="quiz-chart" style="width: 100px !important;"></canvas>
+        <div class="col-sm-4">
+            <canvas id="gender-chart" style="width: 100px !important;"></canvas>
         </div>
-        <div  style="border-style: solid; border-color:red;"class="col-sm-4">
+        <div class="col-sm-4">
             <canvas id="language-chart" style="width: 100px !important;"></canvas>
         </div>
-        <div style="border-style: solid; border-color:green;"class="col-sm-4">
+        <div class="col-sm-4">
             <canvas id="grades-chart" style="width: 100px !important;"></canvas>
         </div>
     </div>

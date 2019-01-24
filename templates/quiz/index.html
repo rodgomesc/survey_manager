@@ -19,85 +19,78 @@
     <header>
 
       <div class="header-top clearfix">
-        <h1 class="l-center">{{quiz}}</h1>
-       <!--
+        <h1 style="color:white; font-weight: bold;" class="l-center">{{quiz}}</h1>
+
         <a class="l-right toggle-menu" href="#">
           <i></i>
           <i></i>
           <i></i>
         </a>
       </div>
-
+      <!--
       <nav class="hide">
         <ul id="menu">
+         {% for item in object.question_list %}
           <li data-menuanchor="firstSection">
-            <a href="#firstSection" title="First Section">First Question</a>
+            <a href="#firstSection" title="First Section"></a>
           </li>
-          <li data-menuanchor="secondSection">
-            <a href="#secondSection" title="Second Section">Second Question</a>
-          </li>
-          <li data-menuanchor="thirdSection">
-            <a href="#thirdSection" title="Second Section">Third Section</a>
-          </li>
-          <li data-menuanchor="fourthSection">
-            <a href="#fourthSection" title="Fourth Section">Fourth Section</a>
-          </li>
-          <li data-menuanchor="fifthSection">
-            <a href="#fifthSection" title="First Slide">First Slide</a>
-          </li>
-          <li data-menuanchor="fifthSection/1">
-            <a href="#fifthSection/1" title="Second Slide">Second Slide</a>
-          </li>
+         {% endfor %}
         </ul>
       </nav>
-      -->
+    -->
     </header>
 
     <div id="fullpage">
-      <section class="vertical-scrolling">
+
+       <form id="quiz-form" method="post">{% csrf_token %}
+          {% for form, question_id in obj_list %}
+              <section class="vertical-scrolling">
+
+                  <div style="background-color: #348899" class="horizontal-scrolling">
+                      <div class="container">
+                        <div class="jumbotron jumbotron-fluid shadow-lg p-3 mb-5 bg-white rounded">
+                            <div class="row">
+                                <div  class="col-sm-3">
+                                        <img  width="200" height="200" class="shadow-sm p-3 mb-5 rounded-circle" src="{{ question_id|get_image_from_question}}" alt="quiz image">
+                                </div>
+                                <div class="col-sm-9">
+                                    <h1 class="display-4">{{ form.label }}</h1>
+
+                                        <li>{{ form }}</li>
 
 
-          {% for item in object.question_list %}
-          <div class="horizontal-scrolling">
-              <div class="container">
-                <div class="jumbotron jumbotron-fluid shadow-lg p-3 mb-5 bg-white rounded">
-                    <div class="row">
-                        <div style="border-style:solid; border-color:blue;" class="col-sm-3">
-                                <img  width="200" height="200" class="shadow-sm p-3 mb-5 rounded-circle" src="{{ item|get_value_from_dict:'question_image' }}" alt="quiz image">
-                        </div>
-                        <div class="col-sm-9">
-                            <h1 class="display-4">{{ item|get_value_from_dict:'question' }}</h1>
-                                {% for x in item|get_value_from_dict:'choices' %}
-                                <li>    {{ x }} </li>
-                                {% endfor %}
-                                </li>
-                        </div>
-                     </div>
+                                </div>
+                             </div>
 
-                 </div>
-               </div>
+                         </div>
+                       </div>
 
 
+                      <div class="inner" id="bt-submit"></div>
 
 
-            <!-- <a id="button2Id" href="#firstSection/2" class="icon-up-open-big"></a> -->
-          </div>
+                    <!-- <a id="button2Id" href="#firstSection/2" class="icon-up-open-big"></a> -->
+                  </div>
+
+
+              </section>
+
           {% endfor %}
 
 
-        <!--
-        <div class="horizontal-scrolling">
-          <h2>fullPage.js</h2>
-          <h3>This is the 2 slide</h3>
-          <p class="end">Thank you!</p>
-        </div>
-        <div class="horizontal-scrolling">
-          <h2>fullPage.js</h2>
-          <h3>This is the 3 slide</h3>
-          <p class="end">Thank you!</p>
-        </div>
-        -->
-      </section>
+
+       </form>
+
+         <!--
+        <section class="vertical-scrolling">
+    <h2>fullPage.js</h2>
+    <h3>This is the second section</h3>
+  </section>
+  <section class="vertical-scrolling">
+    <h2>fullPage.js</h2>
+    <h3>This is the third section</h3>
+  </section>
+  -->
     </div>
     <script src="{% static 'js/jquery.js'%}"></script>
     <script src="{% static 'js/jquery.fullPage.min.js' %}"></script>
@@ -117,22 +110,44 @@
 
 
         // fullpage customization
+        var myAnchors = []
+
+        for(var i = 1; i<={{ object.question_list|length }}; i++){
+            myAnchors.push('Question' + i);
+        }
+
         $('#fullpage').fullpage({
-          sectionsColor: ['#348899'],
+          //sectionsColor: ['#348899'],
           sectionSelector: '.vertical-scrolling',
           slideSelector: '.horizontal-scrolling',
           navigation: true,
           slidesNavigation: false,
           controlArrows: true,
-          anchors: ['firstSection'],
+
+          anchors: myAnchors,
+
+
           menu: '#menu',
 
           afterLoad: function(anchorLink, index) {
             $header_top.css('background', 'rgba(0, 47, 77, .3)');
             $nav.css('background', 'rgba(0, 47, 77, .25)');
-            if (index == 5) {
-                $('#fp-nav').hide();
-              }
+            //if (index == 3) {
+               // $('#fp-nav').hide();
+              //}
+
+            if(index === $('#fullpage .vertical-scrolling').length){ //if in last page
+
+                $('.inner').show()
+                if (($(".inner").html().length <= 0)){ //if not have some content inside div
+                        $(".inner").append("<input id=\"button2Id\" class=\"btn btn-primary btn-lg active\" type=\"submit\" value=\"Enviar\">")
+                }
+            }
+            else{
+                // $('.inner').hide();
+
+            }
+
           },
 
           onLeave: function(index, nextIndex, direction) {
@@ -167,9 +182,16 @@
             }
           }
         });
-        $(document).on('click', '#button2Id', function() {
-        alert("clicado")
-});
+
+        $(document).on('click', '#button2Id', function() { //this is because append prevent button actions, and form can't submit
+            $("#quiz-form").submit();
+        });
+
+        $('input:radio').change( //when any radio is clicled slide will move down :)
+                function(){
+                    $.fn.fullpage.moveSectionDown();
+                }
+            );
 
     </script>
 

@@ -1,42 +1,56 @@
 
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from .models import Quiz, Question, QuestionChoices, QuestionImage
-from django.views.generic import (
-        DetailView
+from .models import (
+        Quiz, Question,
+        QuizUserContent,
+        QuizScore,
         )
-from apps.quiz.templatetags import custom_tags
+
+
+from .forms import QuizUserContentForm
+
+from django.views.generic.edit import (
+        FormView
+        )
 
 def index(request, ):
+
     return render(request, 'quiz/index.html')
 
 
-class QuizView(DetailView):
+class QuizView(FormView):
     template_name = 'quiz/index.html'
+    form_class = QuizUserContent
+    success_url = '/thanks/'
 
-    def get_object(self):
-        quiz_id = self.kwargs.get("quiz_id")
-        quiz = get_object_or_404(Quiz, pk=quiz_id)
+    def get(self, request, *args, **kwargs):
 
-        questions = Question.objects.filter(quiz_id=quiz_id).values('question','id')
-        question_list = []
+        quiz = get_object_or_404(Quiz, pk=self.kwargs['quiz_id'])
+        form = QuizUserContentForm(questions=quiz.question_set.all())
 
-        def image_exist(object):
-            if object.image is not None:
-                return object.image.image.url
-            else:
-                return '/img/default.jpeg'
+        if request.method == "POST":
+            for key, value in request.POST.items():
+                # we dont want to store then token
+                if key != 'csrfmiddlewaretoken':
+                    # key is pk of Question, value is pk of choice
+                    p = QuizUserContent(quiz_id=self.kwargs['quiz_id'], question_id=key,  choice_id=value)
+                    p.save()
+            #store score for report
+            QuizScore(quiz_id = self.kwargs['quiz_id']).save()
 
-        for question in questions:
+            #times that people answered the quiz_id=1
+            #vote_count = QuizScore.objects.filter(quiz_id=1).count()
+            #print(vote_count)
 
-           question_list.append({
-               'question': question['question'],
-               'question_image': image_exist(Question.objects.get(pk=question['id'])) ,#'#Question.objects.get(pk=question['id']).image if Question.objects.filter(pk=question['id']).values('image').exists() else '',#if image_url is not None else 'img/default.jpg',
-               'choices': [row.choice for row in QuestionChoices.objects.filter(question=question['id'])]
 
-           })
+        # this will allow to find the corresponding image for each question with filter get_image_from_question
+        form_id_list = Question.objects.filter(quiz_id=self.kwargs['quiz_id']).values_list('id', flat=True)
+        obj_list = zip(form, form_id_list) # later.... {% for form, question_id in obj_list %}...
         context = {
-            'quiz': quiz,
-            'question_list': question_list
-        }
-        return context
+            'obj_list': obj_list,
+            'quiz': quiz.title,
+            }
+
+        return render(request, self.template_name, context)
+
