@@ -6,6 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('nested_admin/', include('nested_admin.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
+    path('statistics/', include('apps.core.urls')),
 
 
 ]
