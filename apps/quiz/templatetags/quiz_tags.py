@@ -10,3 +10,5 @@ def get_image_from_question(question_id):
     except QuestionImage.DoesNotExist:
         img = '/img/default.jpeg'
     return img
+
+
