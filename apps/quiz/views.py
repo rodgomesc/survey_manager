@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.shortcuts import get_object_or_404
 from .models import (
         Quiz, Question,
@@ -33,8 +33,10 @@ def quiz_view(request,quiz_id):
                 # key is pk of Question, value is pk of choice
                 p = QuizUserContent(quiz_id=quiz_id, question_id=key,  choice_id=value)
                 p.save()
+
         #store score for report
         QuizScore(quiz_id = quiz_id).save()
+        return redirect(reverse('sucessfull'))
 
         #times that people answered the quiz_id=1
         #vote_count = QuizScore.objects.filter(quiz_id=1).count()
@@ -47,6 +49,7 @@ def quiz_view(request,quiz_id):
     context = {
         'obj_list': obj_list,
         'quiz': quiz.title,
+        'question_count': Question.objects.filter(quiz_id=quiz_id).values_list('id', flat=True).count()
         }
 
     return render(request, 'quiz/index.html', context )

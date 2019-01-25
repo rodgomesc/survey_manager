@@ -1,4 +1,5 @@
 {% load static %}
+{% load statistics_tags %}
 <!doctype html>
 <html lang="en">
 
@@ -13,7 +14,7 @@
     <link rel="stylesheet" href="{% static  'assets/libs/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/fonts/fontawesome/css/fontawesome-all.css' %}">
     <link rel="stylesheet" href="{% static 'assets/vendor/charts/c3charts/c3.css' %}">
-    <title>Concept - Bootstrap 4 Admin Dashboard Template</title>
+    <title>Manager</title>
 </head>
 
 <body>
@@ -24,9 +25,10 @@
          <!-- ============================================================== -->
         <!-- navbar -->
         <!-- ============================================================== -->
+
        <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="../index.html">Concept</a>
+                <a class="navbar-brand" href="#">Survey Manager Statistics</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -134,12 +136,14 @@ John Abraham</h5>
                 </div>
             </nav>
         </div>
+
         <!-- ============================================================== -->
         <!-- end navbar -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- left sidebar -->
         <!-- ============================================================== -->
+        <!--
         <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
@@ -425,13 +429,14 @@ John Abraham</h5>
                 </nav>
             </div>
         </div>
+        -->
         <!-- ============================================================== -->
         <!-- end left sidebar -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
-        <div class="dashboard-wrapper">
+        <div>
             <div class="container-fluid  dashboard-content">
                 <!-- ============================================================== -->
                 <!-- pageheader -->
@@ -456,10 +461,9 @@ John Abraham</h5>
                 <!-- ============================================================== -->
                 <!-- end pageheader -->
                 <!-- ============================================================== -->
+                <!--
                 <div class="row">
-                    <!-- ============================================================== -->
-                    <!--  area chart  -->
-                    <!-- ============================================================== -->
+
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">Area Chart</h5>
@@ -468,12 +472,7 @@ John Abraham</h5>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!--  end area chart  -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!--  spline chart  -->
-                    <!-- ============================================================== -->
+
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">Spline Chart</h5>
@@ -483,13 +482,10 @@ John Abraham</h5>
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!-- end  spline chart  -->
-                <!-- ============================================================== -->
+                -->
+                <!--
                 <div class="row">
-                    <!-- ============================================================== -->
-                    <!--  zoom chart  -->
-                    <!-- ============================================================== -->
+
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">Zoom Chart</h5>
@@ -498,12 +494,7 @@ John Abraham</h5>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!--  end zoom chart  -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!--  scatter chart  -->
-                    <!-- ============================================================== -->
+
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">Scatter Plot</h5>
@@ -513,13 +504,10 @@ John Abraham</h5>
                         </div>
                     </div>
                 </div>
-                <!-- ============================================================== -->
-                <!--  end scatter chart  -->
-                <!-- ============================================================== -->
+                -->
+                <!--
                 <div class="row">
-                    <!-- ============================================================== -->
-                    <!--  stacked chart  -->
-                    <!-- ============================================================== -->
+
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">Stacked Bar </h5>
@@ -528,12 +516,7 @@ John Abraham</h5>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!--  end stacked chart  -->
-                    <!-- ============================================================== -->
-                    <!-- ============================================================== -->
-                    <!--  combination chart  -->
-                    <!-- ============================================================== -->
+
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="card">
                             <h5 class="card-header">Combination Chart </h5>
@@ -542,10 +525,9 @@ John Abraham</h5>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!--  end combination chart  -->
-                    <!-- ============================================================== -->
+
                 </div>
+                -->
                 <div class="row">
                     <!-- ============================================================== -->
                     <!-- pie chart  -->
@@ -590,7 +572,104 @@ John Abraham</h5>
                     <!-- end dount gauge  -->
                     <!-- ============================================================== -->
                 </div>
+                   <!-- ============================================================== -->
+
+                <!-- recent orders  -->
+                <!-- ============================================================== -->
+                <div class="container-fluid">
+                    <div class="row col-xl-12">
+                        <div class="card col-xl-12">
+                        <h5 class="card-header">
+                            Available Quizzes
+                            <a  target="_blank" href="/admin/quiz/quiz/" class="btn btn-outline-light float-right">Manage Quiz</a>
+                        </h5>
+
+
+
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class="bg-light">
+                                            <tr class="border-0">
+                                                <th class="border-0">#</th>
+                                                <th class="border-0">Quiz name</th>
+                                                <th class="border-0">Nº Questions</th>
+                                                <th class="border-0">Nº People who answered</th>
+                                                <th class="border-0">edit</th>
+                                                <th class="border-0">actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            {% csrf_token %}
+                                            {% for obj in object_list %}
+                                            <tr>
+
+
+                                                <td>{{obj.quiz.id}}</td>
+                                                <!--
+                                                <td>
+                                                    <div class="m-r-10"><img src="assets/images/product-pic.jpg" alt="user" class="rounded" width="45"></div>
+                                                </td>
+                                                -->
+                                                <td>{{obj.quiz}}</td>
+                                                <td>{{obj.question_number}}</td>
+                                                <td>{{obj.score}}</td>
+
+                                                <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#myModal" data-quiz-id="{{obj.quiz.id}}"><span class="fas fa-edit"></span></button></p></td>
+                                                <td><p data-placement="top" data-toggle="tooltip" title="Details"><button class="btn btn-info btn-xs" data-title="Details" data-toggle="modal" data-target="#details" ><span class="fas fa-eye"></span></button></p></td>
+
+
+                                            </tr>
+                                             {% endfor %}
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- end recent orders  -->
+
             </div>
+
+              <!-- The Modal -->
+              <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Most voted options</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                       <div class="container-fluid">
+                           <div id="chartsContainer"></div>
+
+                        </div>
+
+                    </div>
+
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
             <!-- ============================================================== -->
             <!-- footer -->
             <!-- ============================================================== -->
@@ -598,13 +677,11 @@ John Abraham</h5>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                            Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                            Copyright © 2019 Survey Manager. All rights reserved</a>.
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                             <div class="text-md-right footer-links d-none d-sm-block">
-                                <a href="javascript: void(0);">About</a>
-                                <a href="javascript: void(0);">Support</a>
-                                <a href="javascript: void(0);">Contact Us</a>
+
                             </div>
                         </div>
                     </div>
@@ -626,6 +703,83 @@ John Abraham</h5>
     <script src="{% static 'assets/vendor/charts/c3charts/d3-5.4.0.min.js' %}"></script>
     <script src="{% static 'assets/vendor/charts/c3charts/C3chartjs.js' %}"></script>
     <script src="{% static 'assets/libs/js/main-js.js' %}"></script>
+    <script>
+
+
+
+
+
+$('#myModal').on('shown.bs.modal', function (e) {
+
+     var quiz_id = $(e.relatedTarget).data('quiz-id');
+
+     $.ajax({
+        url : "chart_process/",
+        type : "POST",
+        data : {
+          'quiz_id': quiz_id,
+          'csrfmiddlewaretoken' : $('input[name=csrfmiddlewaretoken]').val()
+        },
+        dataType: 'json',
+        success : function(response) {
+        //alert(JSON.stringify(response.data[0].id))
+        console.log(JSON.stringify(response.data))
+
+
+        var names = response.data
+        var x = 0;
+        var teste = response.data
+
+
+
+          var iDiv = document.createElement('div');
+          iDiv.id = 'chart'
+          document.getElementById('chartsContainer').appendChild(iDiv);
+
+          var chart = c3.generate({
+            bindto : "#chart",
+            padding: {
+                top: 0,
+                right: 50,
+                bottom: 0,
+                left: 10,
+              },
+            data: {
+               columns: teste,
+                type : 'pie',
+
+                keys: {
+                  //question: 'question',
+                  value: ['choices'],
+                },
+                names: {
+                  choices: ''
+
+                }
+            }
+
+          });
+
+
+          chart.resize({
+              height: 200,
+              width: 300
+          })
+
+
+       }, //end of sucess
+        // handle a non-successful response
+        error : function(xhr,errmsg,err) {
+             alert(err)
+
+        }
+    });
+})
+$('#myModal').on('hidden.bs.modal', function () {
+     $( "#chartsContainer" ).empty(); // we need to clean all added charts on modal close
+})
+
+    </script>
 </body>
 
 </html>

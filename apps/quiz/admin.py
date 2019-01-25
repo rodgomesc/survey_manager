@@ -27,18 +27,17 @@ class QuestionTabularInline(nested_admin.NestedTabularInline):
 class QuestionAdmin(nested_admin.NestedModelAdmin):
     #def get_model_perms(self, request): # hide this model from admin
     #        return {}
-    change_list_template = 'admin/change_list_graph.html'
     inlines = [QuestionTabularInline]
 
 class QuestionImageAdmin(admin.ModelAdmin):
     def get_model_perms(self, request): # hide this model from admin
             return {}
-    change_list_template = 'admin/change_list_graph.html'
+
 
 
 class QuizUserContentAdmin(admin.ModelAdmin):
     model = QuizUserContent
-    change_list_template = 'admin/change_list_graph.html'
+
 
 
 

@@ -17,5 +17,5 @@ class QuizUserContentForm(forms.Form):
                 choices.append((answer.pk, answer.choice,))
 
             self.fields['{0}'.format(question.pk)] = \
-                forms.ChoiceField(label=question, required=True,
+                forms.ChoiceField(label=question,
                                   choices=choices, widget=forms.RadioSelect)

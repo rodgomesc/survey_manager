@@ -38,6 +38,5 @@ class QuizUserContent(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice = models.ForeignKey(QuestionChoices, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.quiz.title

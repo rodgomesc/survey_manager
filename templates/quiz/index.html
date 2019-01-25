@@ -1,5 +1,5 @@
 {% load static %}
-{% load custom_tags %}
+{% load quiz_tags %}
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <!-- Full Page CSS -->
     <link rel='stylesheet' href="{% static 'css/jquery.fullPage.css'%}">
+    <!-- Sweet Alert CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" rel="stylesheet">
     <!-- My Custom CSS -->
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+
+
+
     <title>Document</title>
 </head>
 <body>
@@ -55,8 +60,9 @@
                                 </div>
                                 <div class="col-sm-9">
                                     <h1 class="display-4">{{ form.label }}</h1>
-
-                                        <li>{{ form }}</li>
+                                        <div>
+                                            <li>{{ form }}</li>
+                                        </div>
 
 
                                 </div>
@@ -95,6 +101,8 @@
     <script src="{% static 'js/jquery.js'%}"></script>
     <script src="{% static 'js/jquery.fullPage.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.all.min.js"></script>
+
 
     <script>
 
@@ -111,10 +119,7 @@
 
         // fullpage customization
         var myAnchors = []
-
-        for(var i = 1; i<={{ object.question_list|length }}; i++){
-            myAnchors.push('Question' + i);
-        }
+        var radioChanged = 0
 
         $('#fullpage').fullpage({
           //sectionsColor: ['#348899'],
@@ -184,14 +189,34 @@
         });
 
         $(document).on('click', '#button2Id', function() { //this is because append prevent button actions, and form can't submit
-            $("#quiz-form").submit();
+            //var queryString = $('#quiz-form').serialize();
+            //alert(queryString)
+            var f = document.getElementById('quiz-form')
+            if (f.checkValidity()) {
+                f.submit();
+
+            } else {
+
+                Swal.fire({
+                  type: 'error',
+                  title:  'You need to select at least one Choice!',
+
+
+                })
+
+
+            }
         });
 
         $('input:radio').change( //when any radio is clicled slide will move down :)
                 function(){
+                    radioChanged ++;
                     $.fn.fullpage.moveSectionDown();
+
+
                 }
             );
+
 
     </script>
 

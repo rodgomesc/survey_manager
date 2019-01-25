@@ -20,8 +20,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'debug_toolbar',
+
     'apps.quiz',
+    'apps.statistics'
 
 ]
 
@@ -33,7 +34,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 ROOT_URLCONF = 'surveys_manager.urls'
@@ -51,6 +52,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
             ],
+
         },
     },
 ]
@@ -100,6 +102,3 @@ STATICFILES_DIRS = [
 
 MEDIA_URL= os.path.join(BASE_DIR, '/img/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
-
-INTERNAL_IPS = ('127.0.0.1',)
-
