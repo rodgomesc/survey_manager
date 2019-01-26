@@ -1,24 +1,26 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from apps.quiz.models import *
 import json
 from django.http import JsonResponse
 
-
+# is receive ajax request with a id, and return data in c3chart format
 def chart_process(request):
+
     if request.method == "GET":
 
         return HttpResponse(json.dumps({"msg": "incorrect request"}),
                             content_type="application/json")
-    else:
+
+    elif request.method == "POST":
 
         quiz_id = request.POST.get('quiz_id')
         quiz = Quiz.objects.get(id=quiz_id)
         votes = quiz.quizusercontent_set.select_related()
         choice_counts = {}
 
-        for vote in votes:
 
+        for vote in votes:
             if vote.choice.id not in choice_counts:
                 choice_counts[vote.choice.id] = {
                     'item': vote.choice.choice,
@@ -27,22 +29,25 @@ def chart_process(request):
             choice_counts[vote.choice.id]['count'] += 1
 
         dict_list = []
-
         last = []
+
+        # returned data needs to be in c3chart format [['name',value], ['name', value]]
         for i, j in choice_counts.items():
             dict_list.append(j)
         for i in dict_list:
            last.append(list((i['item'], i['count'])))
 
+        return JsonResponse({'data': last, }, safe=False,  json_dumps_params={'ensure_ascii':False})
 
-        return JsonResponse({'data': last}, safe=False,  json_dumps_params={'ensure_ascii':False})
+    else:
+        return HttpResponse(json.dumps({"msg": "incorrect request"}),
+                            content_type="application/json")
 
 
 def index(request):
 
 
     quizzes = Quiz.objects.all()
-         #QuizScore.objects.filter(quiz_id=1).count()
     object_list = []
     for quiz in quizzes:
 

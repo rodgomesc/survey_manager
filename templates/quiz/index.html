@@ -59,10 +59,20 @@
                                         <img  width="200" height="200" class="shadow-sm p-3 mb-5 rounded-circle" src="{{ question_id|get_image_from_question}}" alt="quiz image">
                                 </div>
                                 <div class="col-sm-9">
-                                    <h1 class="display-4">{{ form.label }}</h1>
-                                        <div>
-                                            <li>{{ form }}</li>
+                                    <div style="height: 100%" class="card">
+                                      <h5 class="card-header display-4">{{ form.label }}</h5>
+                                      <div class="card-body">
+                                        <ul>
+                                          <li>
+                                              {{ form }}
+                                          </li>
+                                        </ul>
+
+
                                         </div>
+                                        <div class="inner" id="bt-submit"></div>
+
+
 
 
                                 </div>
@@ -72,7 +82,7 @@
                        </div>
 
 
-                      <div class="inner" id="bt-submit"></div>
+
 
 
                     <!-- <a id="button2Id" href="#firstSection/2" class="icon-up-open-big"></a> -->
