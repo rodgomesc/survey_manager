@@ -155,7 +155,7 @@
 
                 $('.inner').show()
                 if (($(".inner").html().length <= 0)){ //if not have some content inside div
-                        $(".inner").append("<input id=\"button2Id\" class=\"btn btn-primary btn-lg active\" type=\"submit\" value=\"Enviar\">")
+                        $(".inner").append("<input id=\"button2Id\" class=\"btn btn-primary btn-lg active\" type=\"submit\" value=\"Send\">")
                 }
             }
             else{
@@ -198,9 +198,8 @@
           }
         });
 
-        $(document).on('click', '#button2Id', function() { //this is because append prevent button actions, and form can't submit
-            //var queryString = $('#quiz-form').serialize();
-            //alert(queryString)
+        $(document).on('click', '#button2Id', function() {
+            //this is because append prevent button actions, and form can't submit
             var f = document.getElementById('quiz-form')
             if (f.checkValidity()) {
                 f.submit();
@@ -220,7 +219,6 @@
 
         $('input:radio').change( //when any radio is clicled slide will move down :)
                 function(){
-                    radioChanged ++;
                     $.fn.fullpage.moveSectionDown();
 
 

@@ -310,32 +310,6 @@ $('#myModal').on('shown.bs.modal', function (e) {
     });
 
 })
-function AddQuestions(questions) {
-
-    var x = questions.map( function(item) {
-        console.log(questions)
-
-    });
-
-
-    var div = document.createElement('div');
-
-    div.className = 'row';
-
-    div.innerHTML =
-        '<input type="text" name="name" value="" />\
-        <input type="text" name="value" value="" />\
-        <label> <input type="checkbox" name="check" value="1" /> Checked? </label>\
-        <input type="button" value="-" onclick="removeRow(this)">';
-
-    document.getElementById('content').appendChild(div);
-}
-
-$('#myModal').on('hidden.bs.modal', function () {
-     $( "#chartsContainer" ).empty(); // we need to clean all added charts on modal close
-     $( "#content" ).empty(); // we need to clean all added content on modal close
-})
-
     </script>
 </body>
 
