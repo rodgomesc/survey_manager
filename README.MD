@@ -1,6 +1,13 @@
 
 
-#####Thank You and Happy Hacking Guys
+####Thank You and Happy Hacking Guys
+
+just clone and ```pip install -r requeriments.txt && python manage.py runserver```
+
+login credentials:
+
+username: admin <br>
+password: admin
 
 ### Relation of requeriments applied to this project:
 
